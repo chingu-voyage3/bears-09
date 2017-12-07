@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SearchBox from './components/SearchBox'
 import './App.css';
+import axios from 'axios'
 
 class App extends Component {
   constructor(props) {
@@ -14,11 +15,10 @@ class App extends Component {
   podcastSearch(term) {
     // https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/
     /*    iTunes Search API logic here    */
-    fetch(`https://itunes.apple.com/search?media=podcast&term=${term}`)
-      .then(response => response.json())
-      .then(data=> {
-        this.setState({podcasts: data.results})
-        console.log(this.state.podcasts);
+    axios.get(`https://itunes.apple.com/search?media=podcast&term=${term}`)
+      .then(res => {
+        this.setState({podcasts: res.data.results})
+        console.log(this.state.podcasts)
       })
   }
 
