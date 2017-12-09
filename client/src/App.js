@@ -1,21 +1,49 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import SearchBox from './components/SearchBox';
+import ResultsBox from './components/ResultsBox';
 import './App.css';
 
+
 class App extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = { podcasts: [] }
+
+    this.podcastSearch('comedy')  // Initial search on page load
+  }
+
+  podcastSearch(term) {
+    // https://affiliate.itunes.apple.com/resources/documentation/itunes-store-web-service-search-api/
+    /*    iTunes Search API logic here    */
+    fetch(`https://itunes.apple.com/search?media=podcast&term=${term}&limit=5`)
+      .then(response => response.json())
+      .then(data=> {
+        this.setState({podcasts: data.results})
+        console.log(this.state.podcasts);
+      })
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div>
+        <SearchBox onSearchTermChange={term => this.podcastSearch(term)} />
+        <ResultsBox {...this.state} />
       </div>
     );
   }
 }
 
 export default App;
+
+
+
+/*
+
+Highlights by country
+`https://itunes.apple.com/${country}/rss/toppodcasts/limit=25/json`
+
+Podcast feed
+`https://itunes.apple.com/lookup?id=${id}`
+
+*/
