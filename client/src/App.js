@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import SearchBox from './components/SearchBox'
+import SearchBox from './components/SearchBox';
+import ResultsBox from './components/ResultsBox';
 import './App.css';
+
 
 class App extends Component {
   constructor(props) {
@@ -25,6 +27,8 @@ class App extends Component {
   render() {
     return (
       <SearchBox onSearchTermChange={term => this.podcastSearch(term)} />
+      <ResultsBox {...this.state} />
+      
     );
   }
 }
