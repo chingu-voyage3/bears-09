@@ -5,16 +5,15 @@ const helmet = require('helmet');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
 
-// DATABASE SETUP
-const mongoDB = process.env.DATABASE || 'mongodb://localhost/podcast-search';
+const config = require('./config/config');
 
-mongoose.connect(mongoDB, {
+mongoose.connect(config.mongoDB, {
   useMongoClient: true
 });
 
 const database = mongoose.connection;
 
-database.on('error', console.error.bind(console, 'MongoDB connectior error:'));
+database.on('error', console.error.bind(console, 'MongoDB connection error:'));
 database.once('open', () => {
   console.log('Connected to the database');
 });
@@ -32,18 +31,18 @@ app.use(morgan('dev'));
 app.use(bodyParser.json());
 
 // ERROR HANDLER
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ message: err.message });
-});
+// app.use((err, req, res, next) => {
+//   console.error(err);
+//   res.status(500).json({ message: err.message });
+// });
 
-app.use((req, res, next) => {
-  res.status(404).json({ error: 'Error finding what you asked' });
-});
+// app.use((req, res, next) => {
+//   res.status(404).json({ error: 'Error finding what you asked' });
+// });
 
-// PORT SETUP
-const PORT = process.env.PORT || 8080;
+require('./router')(app);
+require('./config/passport');
 
-app.listen(PORT, () => {
-  console.log('Server is running on port', PORT);
+app.listen(config.PORT, () => {
+  console.log('Server is running on port', config.PORT);
 });
