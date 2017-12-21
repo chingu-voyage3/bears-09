@@ -25,9 +25,8 @@ class SearchBox extends Component {
     //We need to go and fetch podcasts data
     this.props.fetchPodcasts(this.state.term);
     //reset the input field
-    this.setState( { term: '' } );
-    
-}
+    this.setState( { term: '' } ); 
+  }
 
   render() {
     return (
@@ -46,7 +45,7 @@ class SearchBox extends Component {
   }
 }
 
-//commented this
+//commented this, not sure if it was needed or not
 // const mapStateToProps = state => ({  
 //   podcasts: state.podcasts
 // })
