@@ -1,13 +1,15 @@
+// Routes
+const podcastRoutes = require('./routes/podcasts');
+
+// Authentication
 const passport = require('passport');
-
 const AuthenticationController = require('./controllers/authentication');
-
 // const isAuthenticated = require('./middleware/isAuthenticated');
 
 module.exports = app => {
-  //=========================
-  // Auth Routes
-  //=========================
+  app.use('/podcasts', podcastRoutes);
+
+  // AUTH ROUTES
   app.post('/auth/register', AuthenticationController.register);
   app.post(
     '/auth/login',

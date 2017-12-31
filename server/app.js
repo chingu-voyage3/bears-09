@@ -40,6 +40,7 @@ app.use(bodyParser.json());
 //   res.status(404).json({ error: 'Error finding what you asked' });
 // });
 
+// ROUTER
 require('./router')(app);
 require('./config/passport');
 
