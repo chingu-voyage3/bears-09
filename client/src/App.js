@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import SearchBox from './containers/SearchBox'
-// import Results from './containers/Results'
+import Results from './containers/Results'
 import './App.css';
 
 class App extends Component {
   constructor(props) {
     super(props)
 
-    this.state = { podcasts: [] }
+    //this.state = { podcasts: [] }
   }
 
   render() {
     return (
       <div>
         <SearchBox />
-        {/* <Results {...this.state} /> */}
+        <Results  />      
       </div>
     );
   }
