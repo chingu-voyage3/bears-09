@@ -1,8 +1,5 @@
-// import React from 'react'
 import { FETCH_PODCASTS } from '../actions/index'
-// const INITIAL_STATE = {
-//   podcasts: []
-// }
+
 const INITIAL_STATE = [];
 
 export default function(state = INITIAL_STATE, action) {

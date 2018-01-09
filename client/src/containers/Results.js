@@ -17,21 +17,15 @@ class Results extends Component {
                     {data.artistName} | {data.collectionName}   
                 </li>
             );    
-        } else {
-            return (
-                <li>kind on the api is: {data.kind}</li>
-            )
         }
-          
+        return (
+            <li>kind on the api is: {data.kind}</li>
+        );  
     }
     
     render() {
-        let results = null;
-        if (this.props.podcasts.podcasts){
-            results = this.props.podcasts.podcasts.results.map(this.renderResults);
-        } else {
-            results = <div>Results to go here</div>
-        }
+        const  { podcasts } = this.props.podcasts;
+        const results = podcasts ? podcasts.results.map(this.renderResults) : <div>Results to go here</div>;
 
         return (
             <div>Results:
